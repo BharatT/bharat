@@ -1,0 +1,54 @@
+.input{
+	font-family: Verdana;
+	font-size:10px;
+	color:#222;
+	
+}
+.output{
+	font-family: Verdana;
+	font-size:10px;
+	color:#222;
+	}
+.form{
+	 font-family: Verdana;
+	 font-size:10px;
+	}
+.readOnlyField
+	{	
+	border-bottom-width: 0px; 
+	border-right-width: 0px; 
+	border-left-width: 0px; 
+	border-top-width: 0px; 
+	background-color: #808080
+	}
+.fontStyle
+	{
+	 font-family: Verdana;
+	 font-size:10px;
+	}
+.tableStyle
+	{	
+	height: 200; width: 400; 
+	border-bottom-style: solid; border-bottom-width: 
+	thick; border-top-style: solid; border-left-style: solid; border-right-width: 
+	thick; border-right-style: solid; border-left-width: thick; border-top-width: 
+	thick; border-left-color: LightSlateGray; border-top-color: LightSlateGray; 
+	border-right-color: LightSlateGray; border-bottom-color: LightSlateGray; 
+	background-attachment: fixed; background-color: #ebf3fd; background-position: center center;
+	 font-family: Verdana;
+	 font-size:10px;
+	
+}
+.buttonStyle
+{
+	background-color: #D1D5D8; 
+	color: #400040; font-size: 14px; 
+	font-family: Verdana; border-bottom-width: 
+	medium; border-top-style: double;
+	 border-right-style: double; border-bottom-color: LightSlateGray; 
+	 border-top-width: medium; border-bottom-style: 
+	 double; border-left-color: LightSlateGray; 
+	 border-top-color: LightSlateGray; border-left-style: double; 
+	 border-right-color: LightSlateGray; border-right-width: medium; border-left-width: medium;;
+	
+	}
