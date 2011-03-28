@@ -16,8 +16,7 @@
 		
 				
 					<center>
-					<div>
-  <img src="<?php echo base_url(); ?>images/image.jpg" alt="left" width="80" height="52" align="left">					</div>
+					
 					</center>
 				
 			
@@ -72,7 +71,8 @@
 </tr></table>
 		
 	<input type="hidden" name="_id0" value="_id0" /></form>
-
+<div>
+  <img src="<?php echo base_url(); ?>images/image.jpg" alt="left" width="80" height="52" align="middle">					</div>
 </center>
 </body>
 </html>
