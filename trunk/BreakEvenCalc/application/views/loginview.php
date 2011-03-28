@@ -16,7 +16,8 @@
 		
 				
 					<center>
-					
+					<div>
+  <img src="<?php echo base_url(); ?>images/image.jpg" alt="left" width="80" height="52" align="left">					</div>
 					</center>
 				
 			

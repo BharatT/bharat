@@ -22,12 +22,14 @@ class Calculation extends CI_Controller{
 			$avarageSale=0;
 			$converisonRate=0;
 			$timePeriod = 0;
+			$jobName="";
 			$data['companyName']=$this->session->userdata('companyName');						
 			$data['totalSale']=$totalSale;
 			$data['costSale']=$costSale;
 			$data['fixCost']=$fixCost;
 			$data['avarageSale']=$avarageSale;
 			$data['converisonRate']=$converisonRate;
+			$data['jobName']=$jobName;
 			$data['logoutUrl']='login/logout';
 			$data['userName']=$user;
 			$data['companyName']=$this->session->userdata('companyName');			
@@ -42,6 +44,7 @@ class Calculation extends CI_Controller{
 		$_REQUEST['CostofSale']=0;
 		$_REQUEST['AverageSale']=0;
 		$_REQUEST['ConversionRate']=0;
+		$_REQUEST['jobName']="";
 		$_REQUEST['timePeriod']=0;
 		$data['cancelButton']=false;
 		if($user=='adminUser')
@@ -89,14 +92,14 @@ $data['expenseUrl']="expense/calcExpense";
 			$timePeriod = $query['be_time_period'];
 			$data['userName']=$query['be_create_by'];
 			$data['companyName']=$query['be_company'];
-			
+			$jobName="";
 			$data['totalSale']=$totalSale;
 			$data['costSale']=$costSale;
 			$data['fixCost']=$fixCost;
 			$data['avarageSale']=$avarageSale;
 			$data['converisonRate']=$converisonRate;
 			$data['cancelButton']=true;
-			
+			$data['jobName']=$jobName;//   add  alpesh
 			$_REQUEST['FixedCost']=$fixCost;
 			$_REQUEST['breakeven']="10";
 
@@ -108,6 +111,7 @@ $data['expenseUrl']="expense/calcExpense";
 		$_REQUEST['AverageSale']=$avarageSale;
 		$_REQUEST['ConversionRate']=$converisonRate;
 		$_REQUEST['timePeriod']=$timePeriod;
+		$_REQUEST['jobName']=$jobName;  // add alpesh
 		//$_REQUEST['logoutUrl']="/login/logout";
 		$data['logoutUrl']='../../login/logout';
 		$data['expenseUrl']='expense/calcExpense';
