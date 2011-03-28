@@ -119,12 +119,12 @@ function isNumeric(){
 	$conversionRate=check_input($_REQUEST['ConversionRate'],'Conversion Rate ');
 	$fixedCost=check_input($_REQUEST['FixedCost'],'Fixed Cost');
 	$timePeriod=$_REQUEST['timePeriod'];
-	//$jobName="";
+	$jobName=$_REQUEST['jobName'];
 	$total=$fixedCost;
 //	$breakeven=$_REQUEST['breakeven'];
 	//$comanyName=$_REQUEST['companyName'];
 	$requestFrom=$_REQUEST['requestFrom'];
-	echo $requestFrom;
+//	echo $requestFrom;
 	//	if (strcmp($requestFrom,"expense") == 0) {
 	//	$total=$_REQUEST['Total'];
 	//	echo $total;
@@ -385,11 +385,11 @@ function isNumeric(){
 	//	}
 	// Database Connection
 
-	echo 'save record';
+//	echo 'save record';
 	if(isset($_REQUEST['SaveRecord']))
 	{
 		echo $_REQUEST['SaveRecord'];
-		echo 'inside save record';
+//		echo 'inside save record';
 		$this->load->database();
 	
 		$con = mysql_connect("localhost","root","");
@@ -403,9 +403,9 @@ function isNumeric(){
 		
 		echo mysql_errno($con) . ": " . mysql_error($con). "\n";
 
-		$sql="INSERT INTO break_even_data (be_total_sale, be_cost_sale, be_fix_cost,be_avg_sale,be_conv_rate,be_create_by,be_date,be_company)
+		$sql="INSERT INTO break_even_data (be_total_sale, be_cost_sale, be_fix_cost,be_avg_sale,be_conv_rate,be_create_by,be_date,be_company,be_job_name)
 	VALUES
-	('$totalSale','$costofSale','$fixedCost','$averageSale','$conversionRate','alpesh','$date','$companyName')";
+	('$totalSale','$costofSale','$fixedCost','$averageSale','$conversionRate','alpesh','$date','$companyName','$jobName')";
 
 		if (!mysql_query($sql,$con))
 		{

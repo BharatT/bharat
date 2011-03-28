@@ -114,10 +114,10 @@ function isNumeric(){
 <form id="calcForm" name="calcForm" method="post"
 	action="../calculation/formSubmit" class="form"><input type=hidden name=todo
 	value=post> <input type="hidden" name="requestFrom" value="expense" />
-<table id="panelGrid" width="475px" class="tableStyle">
+<table style="text-align: left;" id="panelGrid" width="475px" class="tableStyle">
 	<thead>
 		<tr>
-			<th scope="colgroup" colspan="3">* All values are in $</th>
+			<th scope="colgroup" colspan="3" style="text-align: left;">* All values are in $</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -289,7 +289,11 @@ function isNumeric(){
 				value="<?php echo $_REQUEST['AverageSale']; ?>" maxlength="8"
 				class="input" /><input id="ConversionRate" name="ConversionRate"
 				type="hidden" value="<?php echo $_REQUEST['ConversionRate']; ?>"
-				maxlength="8" class="input" /></td>
+				maxlength="8" class="input" />
+				
+				<input id="jobName" name="jobName"
+				type="hidden" value="<?php echo $_REQUEST['jobName'];?>" />				
+				</td>
 		</tr>
 		<tr>
 			<td>

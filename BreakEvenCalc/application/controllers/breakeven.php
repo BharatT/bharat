@@ -11,14 +11,14 @@ class Breakeven extends CI_Controller {
 //		$this->load->library('session');
 if(!($this->session->userdata('username')=='adminUser'))redirect('login');
 		
-		echo $this->session->userdata('username');
+//		echo $this->session->userdata('username');
 		//redirect('blog/index');
 		$this->load->database();
 		// load pagination class
 		$this->load->library('pagination');
 		$config['base_url'] = base_url().'index.php/breakeven/index';
 		$config['total_rows'] = $this->db->count_all('break_even_data');
-		$config['per_page'] = '5';
+		$config['per_page'] = '10';
 		$config['full_tag_open'] = '<p>';
 		$config['full_tag_close'] = '</p>';
 
@@ -28,7 +28,16 @@ if(!($this->session->userdata('username')=='adminUser'))redirect('login');
 		$this->load->model('breakeven_model');
 
 		$data['results'] = $this->breakeven_model->get_books($config['per_page'],$this->uri->segment(3));
-
+//echo $this->uri->segment(3);
+if($this->uri->segment(3)=='')
+{
+	$data['logoutUrl']="login/logout";
+}
+else 
+{
+	$data['logoutUrl']="../../login/logout";
+	
+}
 		// load the HTML Table Class
 		$this->load->library('table');
 
