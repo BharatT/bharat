@@ -13,7 +13,7 @@ class Calculation extends CI_Controller{
 				
 		$this->load->library('session');
 		$user=$this->session->userdata('username');
-		echo $user;
+//		echo $user;
 		if($user=='')redirect('login');
 					
 		$totalSale= 0;
@@ -63,7 +63,7 @@ $data['expenseUrl']="expense/calcExpense";
 		
 		$this->load->library('session');
 		$user=$this->session->userdata('username');
-		echo $user;
+//		echo $user;
 		if($user!='adminUser')redirect('login/logout');
 		$this->load->helper('form');
 		$this->load->helper('html');
@@ -90,9 +90,9 @@ $data['expenseUrl']="expense/calcExpense";
 			$avarageSale=$query['be_avg_sale'];
 			$converisonRate=$query['be_conv_rate'];
 			$timePeriod = $query['be_time_period'];
+			$jobName = $query['be_job_name'];
 			$data['userName']=$query['be_create_by'];
 			$data['companyName']=$query['be_company'];
-			$jobName="";
 			$data['totalSale']=$totalSale;
 			$data['costSale']=$costSale;
 			$data['fixCost']=$fixCost;
@@ -129,7 +129,7 @@ $data['expenseUrl']="expense/calcExpense";
 	{
 		$this->load->library('session');
 		$user=$this->session->userdata('username');
-		echo $user;
+//		echo $user;
 		if($user=='')redirect('login');
 		
 		$this->load->helper('form');
