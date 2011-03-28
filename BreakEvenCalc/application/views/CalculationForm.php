@@ -69,10 +69,13 @@ function isNumeric(){
 }
 	  
 </script>
-<center>
+
+<center> <div> <img src="<?php echo base_url(); ?>images/image.jpg" alt="" width="80" height="52" align="left"></div>
 <form id="calcForm" name="calcForm" method="post" onsubmit="return isNumeric()" 
 	action="<?php echo $_REQUEST['urlValue'] ?>" 
-	enctype="application/x-www-form-urlencoded" class="input"><input
+	enctype="application/x-www-form-urlencoded" class="input">
+	
+	<input
 	type=hidden name=todo value=get><input type="hidden" name="breakeven"
 	value="even" /> <?php
 
@@ -116,10 +119,10 @@ function isNumeric(){
 	$conversionRate=check_input($_REQUEST['ConversionRate'],'Conversion Rate ');
 	$fixedCost=check_input($_REQUEST['FixedCost'],'Fixed Cost');
 	$timePeriod=$_REQUEST['timePeriod'];
-
+	//$jobName="";
 	$total=$fixedCost;
 //	$breakeven=$_REQUEST['breakeven'];
-
+	//$comanyName=$_REQUEST['companyName'];
 	$requestFrom=$_REQUEST['requestFrom'];
 	echo $requestFrom;
 	//	if (strcmp($requestFrom,"expense") == 0) {
@@ -397,11 +400,12 @@ function isNumeric(){
 			$date = date("Y-m-d"); ;
 		//echo "$dt1";
 		mysql_select_db("mysql", $con);
+		
 		echo mysql_errno($con) . ": " . mysql_error($con). "\n";
 
 		$sql="INSERT INTO break_even_data (be_total_sale, be_cost_sale, be_fix_cost,be_avg_sale,be_conv_rate,be_create_by,be_date,be_company)
 	VALUES
-	('$totalSale','$costofSale','$fixedCost','$averageSale','$conversionRate','alpesh',$date,$companyName)";
+	('$totalSale','$costofSale','$fixedCost','$averageSale','$conversionRate','alpesh','$date','$companyName')";
 
 		if (!mysql_query($sql,$con))
 		{
@@ -671,7 +675,7 @@ function isNumeric(){
 						<td></td>
 						<td><span style="font-size: 13px">JOB NAME: </span></td>
 						<td><input id="jobName" name="jobName" type="text"
-							value="" class="inputBaox"
+							value="<?php echo $_REQUEST['jobName']; ?>" class="inputBaox"
 							tabindex="2" /></td>
 					</tr>
 					<tr>
