@@ -9,9 +9,7 @@
 </head>
 <body><form action="" method="post">
 
-<h1 align="center"><div>
-					  <img src="<?php echo base_url(); ?>images/image.jpg" alt="" width="80" height="52" align="left" />Break Even Data
-					</div>
+<h1 align="center">
 </h1>
 		<table id="_id0:panelGrid" style="width: 70%; right: 80%" width="475px">
 

@@ -70,7 +70,7 @@ function isNumeric(){
 	  
 </script>
 
-<center> <div> <img src="<?php echo base_url(); ?>images/image.jpg" alt="" width="80" height="52" align="left"></div>
+<center> 
 <form id="calcForm" name="calcForm" method="post" onsubmit="return isNumeric()" 
 	action="<?php echo $_REQUEST['urlValue'] ?>" 
 	enctype="application/x-www-form-urlencoded" class="input">
