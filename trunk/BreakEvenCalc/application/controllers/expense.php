@@ -24,7 +24,7 @@ class Expense extends CI_Controller {
 		
 		$this->load->library('session');
 		$user=$this->session->userdata('username');
-		echo $user;
+//		echo $user;
 		if($user=='')redirect('login');
 				//		echo 'test';
 //		echo $_REQUEST['TotalSale'];
