@@ -399,6 +399,7 @@ function isNumeric(){
 		}
 			$date = date("y-m-d"); 
 			//$dt1=date('d-m-y',strtotime($date));
+		
 		//echo "$dt1";
 		mysql_select_db("mysql", $con);
 		
