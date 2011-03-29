@@ -397,15 +397,16 @@ function isNumeric(){
 		{
 			die('Could not connect: ' . mysql_error());
 		}
-			$date = date("Y-m-d"); ;
+			$date = date("y-m-d"); 
+			//$dt1=date('d-m-y',strtotime($date));
 		//echo "$dt1";
 		mysql_select_db("mysql", $con);
 		
 		echo mysql_errno($con) . ": " . mysql_error($con). "\n";
 
-		$sql="INSERT INTO break_even_data (be_total_sale, be_cost_sale, be_fix_cost,be_avg_sale,be_conv_rate,be_create_by,be_date,be_company,be_job_name)
+		$sql="INSERT INTO break_even_data (be_total_sale, be_cost_sale, be_fix_cost,be_avg_sale,be_conv_rate,be_create_by,be_date,be_company,be_time_period,be_job_name)
 	VALUES
-	('$totalSale','$costofSale','$fixedCost','$averageSale','$conversionRate','alpesh','$date','$companyName','$jobName')";
+	('$totalSale','$costofSale','$fixedCost','$averageSale','$conversionRate','alpesh','$date','$companyName','$timePeriod','$jobName')";
 
 		if (!mysql_query($sql,$con))
 		{
