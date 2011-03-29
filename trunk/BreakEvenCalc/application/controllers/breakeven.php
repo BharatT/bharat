@@ -50,7 +50,7 @@ else
 			//				echo $row['be_seq'];
 			//$row['be_seq']=redirect('welcome/test');
 			$this->table->add_row(anchor('calculation/input/'.$row['be_seq'],$row['be_seq'], 'Link ' .$row['be_seq']), $row['be_total_sale'], $row['be_cost_sale'], $row['be_fix_cost'],
-			$row['be_avg_sale'],$row['be_conv_rate'],$row['be_date'],$row['be_create_by'],$row['be_time_period']); //Add each result row into table, 
+			$row['be_avg_sale'],$row['be_conv_rate'],date('d-m-Y', strtotime($row['be_date'])),$row['be_create_by'],$row['be_time_period']); //Add each result row into table, 
 					
 		}
 
