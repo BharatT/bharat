@@ -43,7 +43,7 @@
 .buttonStyle
 {
 	background-color: #D1D5D8; 
-	color: #400040; font-size: 14px; 
+	color: #400040; font-size: 12px; 
 	font-family: Verdana; border-bottom-width: 
 	medium; border-top-style: double;
 	 border-right-style: double; border-bottom-color: LightSlateGray; 
@@ -53,3 +53,16 @@
 	 border-right-color: LightSlateGray; border-right-width: medium; border-left-width: medium;;
 	
 	}
+.tableBorder
+	{	
+	border-bottom-style: ridge; border-bottom-width: 
+	ridge; border-top-style: ridge; border-left-style: ridge; border-right-width: 
+	ridge; border-right-style: ridge; border-left-width: ridge; border-top-width: 
+	ridge; border-left-color: LightSlateGray; border-top-color: LightSlateGray; 
+	border-right-color: LightSlateGray; border-bottom-color: LightSlateGray; 
+	background-attachment: fixed; background-color: #ebf3fd; background-position: center center;
+	 font-family: Verdana;
+	
+}
+
+	
