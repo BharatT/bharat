@@ -9,7 +9,12 @@
 </head>
 <body><form action="" method="post">
 
-<h1 align="center">
+<h1 align="left" style="font-family: Verdana;
+	font-size:20px;
+	color:#222;">
+	<table><tr><td><div>
+  <img src="<?php echo base_url(); ?>images/image.jpg" alt="left" width="80" height="52" align="middle">
+  					</div></td><td>Break Even List</td></tr></table>
 </h1>
 		<table id="_id0:panelGrid" style="width: 70%; right: 80%" width="475px">
 

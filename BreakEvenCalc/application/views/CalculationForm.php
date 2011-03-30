@@ -5,6 +5,14 @@
 <title>Calculation Test</title>
 </head>
 <body>
+<h1 align="center" style="font-family: Verdana;
+	font-size:20px;
+	color:#222;">
+	<table align="center"><tr><td><div>
+  <img src="<?php echo base_url(); ?>images/image.jpg" alt="left" width="80" height="52" align="middle">
+  					</div></td><td>Break Even Calculator</td></tr></table>
+</h1>
+
 <script type="text/javascript">
 function cancelEvent()
 {
@@ -388,7 +396,7 @@ function isNumeric(){
 //	echo 'save record';
 	if(isset($_REQUEST['SaveRecord']))
 	{
-		echo $_REQUEST['SaveRecord'];
+//		echo $_REQUEST['SaveRecord'];
 //		echo 'inside save record';
 		$this->load->database();
 	
@@ -403,17 +411,17 @@ function isNumeric(){
 		//echo "$dt1";
 		mysql_select_db("mysql", $con);
 		
-		echo mysql_errno($con) . ": " . mysql_error($con). "\n";
+		//echo mysql_errno($con) . ": " . mysql_error($con). "\n";
 
 		$sql="INSERT INTO break_even_data (be_total_sale, be_cost_sale, be_fix_cost,be_avg_sale,be_conv_rate,be_create_by,be_date,be_company,be_time_period,be_job_name)
 	VALUES
-	('$totalSale','$costofSale','$fixedCost','$averageSale','$conversionRate','alpesh','$date','$companyName','$timePeriod','$jobName')";
+	('$totalSale','$costofSale','$fixedCost','$averageSale','$conversionRate','$userName','$date','$companyName','$timePeriod','$jobName')";
 
 		if (!mysql_query($sql,$con))
 		{
 			die('Error: ' . mysql_error());
 		}
-		echo "save record";
+		echo "Record saved successfully";
 //
 		mysql_close($con);
 //	$this->db.query($sql);
@@ -462,13 +470,13 @@ function isNumeric(){
 	$workersYearly=calculateExpenseWorkers($workersMonthly, $workersExpense);
 	$otherYearly = calculateExpenseOther($otherMonthly, $otherExpense);
 	$jobValueYearly=calculateExpenseJob($jobValue, $jobValueExpense);
-	echo $requestFrom;
+//	echo $requestFrom;
 	
 		$total = totalYearly($rentYearly, $phoneYearly,
 		$insuranceYearly, $electricityYearly, $carRegoYearly,
 		$fuelYearly, $advertisingYearly, $wagsYearly, $paygYearly,
 		$workersYearly, $otherYearly,$jobValueYearly);
-		echo $total;
+//		echo $total;
 
 	//echo $total;
 	//	echo "$wagsYearly <br> ";
@@ -647,8 +655,8 @@ function isNumeric(){
 
 
 	?>
-<table id="panelGrid" width="475px"
-	style="width: 1029px; border-bottom-width: medium; border-bottom-style: double; border-top-style: double; border-left-color: #606060; border-top-color: #606060; border-right-color: #606060; border-left-style: double; border-right-width: medium; border-right-style: double; border-left-width: medium; border-bottom-color: #606060; border-top-width: medium; background-color: #ebf3fd">
+<table id="panelGrid" width="475px"  class="tableBorder"
+	style="width: 1029px; ">
 	<thead>
 		<tr>
 			<th scope="colgroup" colspan="1"></th>
@@ -660,71 +668,70 @@ function isNumeric(){
 			<a href="<?php echo $logoutUrl;?>"  id="_id0:_id6" style="color: #0000A0; font-size:12px">Logout</a>			
 			<input type="hidden" name="requestFrom" value="calcForm" />
 			<table border="2" width="475px"
-				style="width: 1010px; background-color: #ebf3fd; height: 269px">
+				style="width: 1010px; background-color: #ebf3fd;  height: 269px font-family: Verdana;
+	 font-size:14px; " >
 				<tbody>
 					<tr>
 						<td>Name:-</td>
 						<td><?php echo $userName;?></td>
 						<td>Company Name:-</td>
 						<td><?php echo $companyName?></td>
-						<td></td>
 					</tr>
 					<tr>
-						<td><span style="font-size: 13px">TOTAL SALE/JOB VALUE $</span></td>
+						<td><span style="font-size: 13px">TOTAL SALE/JOB VALUE </span></td>
 						<td><input id="TotalSale" name="TotalSale" type="text"
 							value="<?php echo $_REQUEST['TotalSale']; ?>" maxlength="8"
 							class="inputBaox" tabindex="1" /></td>
-						<td></td>
-						<td><span style="font-size: 13px">JOB NAME: </span></td>
+						
+						<td><span style="font-size: 13px">JOB NAME </span></td>
 						<td><input id="jobName" name="jobName" type="text"
 							value="<?php echo $_REQUEST['jobName']; ?>" class="inputBaox"
 							tabindex="2" /></td>
 					</tr>
 					<tr>
-						<td><span style="font-size: 13px">COST OF SALE $</span></td>
+						<td><span style="font-size: 13px">COST OF SALE </span></td>
 						<td><input id="CostofSale" name="CostofSale" type="text"
 							value="<?php echo $_REQUEST['CostofSale']; ?>" maxlength="8"
 							tabindex="3" /></td>
-						<td></td>
-					<td><span style="font-size: 13px">TIME PERIOD: </span></td>
+						
+					<td><span style="font-size: 13px">TIME PERIOD </span></td>
 						<td><input id="timePeriod" name="timePeriod" type="text"
 							value="<?php echo $_REQUEST['timePeriod']; ?>" class="inputBaox"
 							tabindex="2" /></td>
 					</tr>
 					<tr>
-						<td><span style="font-size: 13px">AVERAGE SALE $</span></td>
+						<td><span style="font-size: 13px">AVERAGE SALE </span></td>
 						<td><input id="AverageSale" name="AverageSale" type="text"
 							value="<?php echo $_REQUEST['AverageSale']; ?>" maxlength="8"
 							tabindex="4" /></td>
-						<td></td>
-						<td><span style="font-size: 13px">GROSS INCOME $</span></td>
+						
+						<td><span style="font-size: 13px">GROSS INCOME </span></td>
 						<td><input id="agrossIncome" name="agrossIncome" type="text"
 							value="<?php echo $grossIncome; ?>" readonly="readonly"
 							style="background-color: #ebf3fd" disabled="disabled" /></td>
 					</tr>
 					<tr>
-						<td><span style="font-size: 13px">CONVERSION RATE $</span></td>
+						<td><span style="font-size: 13px">CONVERSION RATE </span></td>
 						<td><input id="ConversionRate" name="ConversionRate" type="text"
 							value="<?php echo $_REQUEST['ConversionRate']; ?>" maxlength="8"
 							tabindex="5" /></td>
-						<td></td>
-						<td><span style="font-size: 13px">GROSS MARGIN $</span></td>
+						
+						<td><span style="font-size: 13px">GROSS MARGIN </span></td>
 						<td><input id="grossMargin" name="grossMargin" type="text"
 							value="<?php echo $grossMargin; ?>" readonly="readonly"
 							style="background-color: #ebf3fd" disabled="disabled" /></td>
 					</tr>
-						<td><span style="font-size: 13px">NET PROFIT $</span></td>
+						<td><span style="font-size: 13px">NET PROFIT </span></td>
 						<td><input id="netProfit" name="netProfit" type="text"
 							value="<?php echo $netProfit; ?>" readonly="readonly"
 							style="background-color: #ebf3fd" disabled="disabled" /></td>
-						<td></td>
+						
 					<tr>
 						<td><span style="font-size: 13px">NET PROFIT%</span></td>
 						<td><input id="percentagenetProfit" name="percentagenetProfit"
 							type="text" value="<?php echo $percentagenetProfit; ?>"
 							readonly="readonly" style="background-color: #ebf3fd"
 							disabled="disabled" /></td>
-						<td></td>
 						
 					</tr>
 				</tbody>
@@ -779,7 +786,7 @@ function isNumeric(){
 						<td><span style="font-size: 12px">DAILY</span></td>
 					</tr>
 					<tr>
-						<td><span style="font-size: 13px">FIXED COST $</span></td>
+						<td><span style="font-size: 13px">FIXED COST </span></td>
 						<td><input id="FixedCost" name="FixedCost" type="text"
 							value="<?php echo $total; ?>" maxlength="10" tabindex="6" /></td>
 						<td><input id="fixedcostQuerterly" name="fixedcostQuerterly"
@@ -799,7 +806,7 @@ function isNumeric(){
 					</tr>
 
 					<tr>
-						<td><span style="font-size: 13px">GROSS MARGIN $</span></td>
+						<td><span style="font-size: 13px">GROSS MARGIN </span></td>
 						<td><input id="grossmarginYearly" name="grossmarginYearly"
 							type="text" value="<?php echo $grossmarginYearly; ?>"
 							readonly="readonly" style="background-color: #ebf3fd"
@@ -822,7 +829,7 @@ function isNumeric(){
 							disabled="disabled" /></td>
 					</tr>
 					<tr>
-						<td><span style="font-size: 13px">BREAK EVEN $</span></td>
+						<td><span style="font-size: 13px">BREAK EVEN </span></td>
 						<td><input id="breakevenSalesYearly" name="breakevenSalesYearly"
 							type="text" value="<?php echo $breakevenSalesYearly; ?>"
 							readonly="readonly" style="background-color: #ebf3fd"
@@ -849,7 +856,7 @@ function isNumeric(){
 							disabled="disabled" /></td>
 					</tr>
 					<tr>
-						<td><span style="font-size: 13px">BREAK TRANSCTION $</span></td>
+						<td><span style="font-size: 13px">BREAK TRANSCTION </span></td>
 						<td><input id="eventransactionYearly" name="eventransactionYearly"
 							type="text" value="<?php echo $eventransactionYearly; ?>"
 							readonly="readonly" style="background-color: #ebf3fd"
