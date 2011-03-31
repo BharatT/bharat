@@ -73,10 +73,17 @@
 
 
 
-<a href="<?php echo $logoutUrl?>"  id="_id0:_id6" style="color: #0000A0; font-size:12px">Logout</a></td>
+<a href="<?php echo $logoutUrl?>"  id="_id0:_id6" style="color: #0000A0; font-size:12px">Logout</a>
 
 
 
+
+
+
+<?php if($addURL!='')
+ 	echo '<a href='.$addURL.' id="_id0:_id6" style="color: #0000A0; font-size:12px">Add</a>';
+?>
+</td>
 </tr>
 
 
