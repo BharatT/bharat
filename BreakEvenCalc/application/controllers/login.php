@@ -83,16 +83,11 @@ class Login extends CI_Controller {
 				   'companyName' => $mycompany
 			);
 
-			$this->session->set_userdata($newdata);
-			if($myusername=='adminUser')
-			{
+			$this->session->set_userdata($newdata);		
 				//			/$data['urlValue']="index.php/breakeven/data";
-				redirect('breakeven');
-			}
-			else 
-			{
-				redirect("calculation");
-			}
+			
+			redirect('breakeven');
+			
 				
 		}
 		else {
