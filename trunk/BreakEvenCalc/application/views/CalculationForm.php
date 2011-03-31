@@ -18,7 +18,7 @@ function cancelEvent()
 {
 	var theForm=document.getElementById("calcForm");
 //	alert(theForm);	
-	  theForm.action = '../../breakeven';
+	  theForm.action = '<?php echo $cancelUrl;?>';
 //	this.action=;
 //	window.location.href=';
 	document.calcForm.submit();		
@@ -54,6 +54,7 @@ function isNumeric(){
 	  var averageSale=document.getElementById('AverageSale').value ;
 	  var conversionRate=document.getElementById('ConversionRate').value ;
 	  var fixedcost=document.getElementById('FixedCost').value ;
+	  var timePeriod=document.getElementById('timePeriod').value ;
 	
 	  document.getElementById('errorMessage').innerHTML="";
 	  
@@ -61,7 +62,7 @@ function isNumeric(){
 
 	 // var val1=document.getElementById('rentMonthly').value
 
-	  if((totalSale=="" || totalSale.match(numericExpression)) && (costofSale=="" || costofSale.match(numericExpression)) && (averageSale=="" || averageSale.match(numericExpression)) && (conversionRate=="" || conversionRate.match(numericExpression)) && (fixedcost=="" || fixedcost.match(numericExpression))){
+	  if((timePeriod=="" || timePeriod.match(numericExpression))&&(totalSale=="" || totalSale.match(numericExpression)) && (costofSale=="" || costofSale.match(numericExpression)) && (averageSale=="" || averageSale.match(numericExpression)) && (conversionRate=="" || conversionRate.match(numericExpression)) && (fixedcost=="" || fixedcost.match(numericExpression))){
 //		  alert('valid');
 //		  var totalSale=document.getElementById('saveRecord').value='SaveRecord'; 
 //		document.calcForm.submit();
@@ -148,6 +149,13 @@ function isNumeric(){
 		
 	//if(isset($_REQUEST['formsubmit']))
 	//	{
+	$tpFixedcost=round(calculateFixedCost($fixedCost,$timePeriod));
+	$tpFixedcostQuerterly = round(fixedcostQuarterlyE($tpFixedcost));
+	$tpFixedcostMonthly = round(fixedcostMonthlyE($tpFixedcost));
+	$tpFixedcostWeekly =round(fixedcostWeeklyE($tpFixedcost));
+	$tpFixedcostDaily = round(fixedcostDailyE($tpFixedcostWeekly));
+	
+	
 	$grossIncome =grossIncomeC($totalSale, $costofSale);
 	$grossMargin = grossMarginD($grossIncome, $totalSale);
 	$fixedcostQuerterly = round(fixedcostQuarterlyE($fixedCost));
@@ -160,7 +168,7 @@ function isNumeric(){
 	$grossmarginWeekly = round(grossmarginWeeklyE($grossMargin),2);
 	$grossmarginDaily = round(grossmarginDailyE($grossmarginWeekly),2);
 
-	$breakevenSalesYearly = round(breakevenSalesYearlyF($fixedCost,$grossMargin));
+	$breakevenSalesYearly = round(breakevenSalesYearlyF($tpFixedcost,$grossMargin));
 	$breakevenSalesfixedcostQuerterly =round(breakevenSalesQuarterlyF($breakevenSalesYearly));
 	$breakevenSalesfixedcostMonthly = round(breakevenSalesMonthlyF($breakevenSalesYearly));
 	$breakevenSalesfixedcostWeekly = round(breakevenSalesWeeklyF($breakevenSalesYearly));
@@ -176,9 +184,22 @@ function isNumeric(){
 	$leadsWeekly = round(leadsWeeklyJ($leadsYearly),2);
 	$leadsDaily = round(leadsDailyJ($leadsYearly),2);
 
-	$netProfit = round(netProfitK($grossIncome,$fixedCost),2);
+	$netProfit = round(netProfitK($grossIncome,$tpFixedcost),2);
 	$percentagenetProfit = round(netProfitL($netProfit,$totalSale));
 
+	function calculateFixedCost($fixedCostValue,$timePeriod)
+	{
+		if($timePeriod!='' && $timePeriod>0)
+		{
+			$tpFixedCost=($fixedCostValue/12)*$timePeriod;
+			return $tpFixedCost;
+		}
+		else 
+		{
+			return $fixedCostValue;
+		}
+	}
+	
 		//}		
 	function grossIncomeC($totalSale,$costofSale){
 		$grossIncome=$totalSale-$costofSale;
@@ -191,32 +212,32 @@ function isNumeric(){
 		return $grossMargin;
 
 	}
-	function  fixedcostQuarterlyE($fixedCost)
+	function  fixedcostQuarterlyE($fixedCostValue)
 	{
 
-		$fixedcostQuerterly=$fixedCost/4;
-		return $fixedcostQuerterly;
+		$fixedcostQ=$fixedCostValue/4;
+		return $fixedcostQ;
 
 	}
-	function  fixedcostMonthlyE($fixedCost)
+	function  fixedcostMonthlyE($fixedCostValue)
 	{
 
-		$fixedcostMonthly=$fixedCost/12;
-		return $fixedcostMonthly;
+		$fixedcostM=$fixedCostValue/12;
+		return $fixedcostM;
 
 	}
-	function  fixedcostWeeklyE($fixedCost)
+	function  fixedcostWeeklyE($fixedCostValue)
 	{
 
-		$fixedcostWeekly=$fixedCost/51;
-		return $fixedcostWeekly;
+		$fixedcostW=$fixedCostValue/51;
+		return $fixedcostW;
 
 	}
-	function fixedcostDailyE($fixedcostWeekly)
+	function fixedcostDailyE($fixedcostValue)
 	{
 
-		$fixedcostDaily=$fixedcostWeekly/5;
-		return $fixedcostDaily;
+		$fixedcostD=$fixedcostValue/5;
+		return $fixedcostD;
 
 	}
 
@@ -421,6 +442,7 @@ function isNumeric(){
 		{
 			die('Error: ' . mysql_error());
 		}
+		redirect(breakeven);
 		echo "Record saved successfully";
 //
 		mysql_close($con);
@@ -454,10 +476,10 @@ function isNumeric(){
 	$paygExpense=$_REQUEST['paygExpense'];
 	$workersExpense=$_REQUEST['workersExpense'];
 	$otherExpense=$_REQUEST['otherExpense'];
-	$jobValueExpense=$_REQUEST['JobValueExpense'];
+//	$jobValueExpense=$_REQUEST['JobValueExpense'];
 	
 	$rentYearly = calculateExpenseRent($rentMonthly, $rentExpense);
-	echo $rentYearly;
+//	echo $rentYearly;
 	$phoneYearly =calculateExpensePhone($phoneMonthly, $phoneExpense);
 	$insuranceYearly=calculateExpenseInsurance($insuranceMonthly, $insuranceExpense);
 	$electricityYearly =calculateExpenseElectricity($electricityMonthly,$electricityExpense);
@@ -469,7 +491,9 @@ function isNumeric(){
 	$paygYearly =calculateExpensePayg($paygMonthly, $paygExpense);
 	$workersYearly=calculateExpenseWorkers($workersMonthly, $workersExpense);
 	$otherYearly = calculateExpenseOther($otherMonthly, $otherExpense);
-	$jobValueYearly=calculateExpenseJob($jobValue, $jobValueExpense);
+//	$jobValueYearly=calculateExpenseJob($jobValue, $jobValueExpense);
+	$jobValueYearly=$jobValue;
+	
 //	echo $requestFrom;
 	
 		$total = totalYearly($rentYearly, $phoneYearly,
@@ -615,6 +639,7 @@ function isNumeric(){
 		}
 		return $calculatedRent;
 	}
+	//removed call
 	function calculateExpenseJob($jobValue, $jobValueExpense) {
 		$calculatedRent = $jobValue;
 		if ($jobValueExpense=="Weekly") {
@@ -743,7 +768,7 @@ function isNumeric(){
 			<table border="0">
 				<tbody>
 					<tr>
-						<?php if(!$cancelButton)
+						<?php if(!$viewOnly)
 											
 						echo '<td><input id="expenses" name="Expenses" type="button"
 							value="Expenses" onclick="expenseCalculation()"
@@ -754,11 +779,10 @@ function isNumeric(){
 							value="Save" style="width: 83px;" class="buttonStyle"/> </td>'
 						?>
 						
-						<?php if($cancelButton)
-							echo ' <td> <input id="cancelButton" name="cancelButton" onclick="cancelEvent()" 
+						<td> <input id="cancelButton" name="cancelButton" onclick="cancelEvent()" 
 							value="Cancel" style="width: 83px;" class="buttonStyle" type="button"/>
-							</td>'
-						?>
+							</td>
+						
 						
 						<td style="border: 0" >
 						<span style="font-size: 8pt; color:#FF0000"><?php echo $errorMsg;?></span>
@@ -804,6 +828,27 @@ function isNumeric(){
 							value="<?php echo $fixedcostDaily; ?>" readonly="readonly"
 							style="background-color: #ebf3fd" disabled="disabled" /></td>
 					</tr>
+
+					<tr>
+						<td><span style="font-size: 13px">FIXED COST(TIME PERIOD) </span></td>
+						<td><input id="tpFixedCost" name="tpFixedCost" type="text" readonly="readonly"
+							value="<?php echo $tpFixedcost; ?>" maxlength="10" tabindex="6" /></td>
+						<td><input id="tpFixedcostQuerterly" name="tpFixedcostQuerterly"
+							type="text" value="<?php echo $tpFixedcostQuerterly; ?>"
+							readonly="readonly" style="background-color: #ebf3fd"
+							disabled="disabled" /></td>
+						<td><input id="tpFixedcostMonthly" name="tpFixedcostMonthly"
+							type="text" value="<?php echo $tpFixedcostMonthly; ?>"
+							readonly="readonly" style="background-color: #ebf3fd"
+							disabled="disabled" /></td>
+						<td><input id="tpFixedcostWeekly" name="tpFixedcostWeekly" type="text"
+							value="<?php echo $tpFixedcostWeekly; ?>" readonly="readonly"
+							style="background-color: #ebf3fd" disabled="disabled" /></td>
+						<td><input id="tpFixedcostDaily" name="tpFixedcostDaily" type="text"
+							value="<?php echo $tpFixedcostDaily; ?>" readonly="readonly"
+							style="background-color: #ebf3fd" disabled="disabled" /></td>
+					</tr>
+
 
 					<tr>
 						<td><span style="font-size: 13px">GROSS MARGIN </span></td>

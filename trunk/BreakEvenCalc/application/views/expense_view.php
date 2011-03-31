@@ -259,12 +259,7 @@ function isNumeric(){
 		</tr>
 		<tr>
 			<td>(Job only) Material</td>
-			<td><select name="JobValueExpense" size="1">
-				<option value="Weekly">Weekly</option>
-				<option value="Monthly">Monthly</option>
-				<option value="Quarterly">Quarterly</option>
-				<option value="Yearly">Yearly</option>
-			</select></td>
+			<td></td>
 			<td><input id="jobValue" name="jobValue" type="text"
 				value="<?php echo $jobValue; ?>" maxlength="8"
 				class="input" /></td>
