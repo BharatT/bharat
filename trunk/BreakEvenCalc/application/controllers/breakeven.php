@@ -9,7 +9,7 @@ class Breakeven extends CI_Controller {
 
 	function index() {
 //		$this->load->library('session');
-if(!($this->session->userdata('username')=='adminUser'))redirect('login');
+if(($this->session->userdata('username')==''))redirect('login');
 		
 //		echo $this->session->userdata('username');
 		//redirect('blog/index');
@@ -26,8 +26,15 @@ if(!($this->session->userdata('username')=='adminUser'))redirect('login');
 
 		//load the model and get results
 		$this->load->model('breakeven_model');
-
-		$data['results'] = $this->breakeven_model->get_books($config['per_page'],$this->uri->segment(3));
+	if(($this->session->userdata('username')=='administrator')){
+		$data['addURL']="";
+		$data['results'] = $this->breakeven_model->get_books($config['per_page'],$this->uri->segment(3));}
+	else 
+	{
+		$data['addURL']="calculation";
+		$companyId=$this->session->userdata('companyName');
+		$data['results'] = $this->breakeven_model->get_filter_breakeven($companyId,$config['per_page'],$this->uri->segment(3));
+	}
 //echo $this->uri->segment(3);
 if($this->uri->segment(3)=='')
 {
@@ -64,6 +71,7 @@ else
 		$this->load->view('breakeven_view', $data);
 		
 	}
+
 	
 }
 ?>

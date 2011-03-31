@@ -15,7 +15,7 @@ class Calculation extends CI_Controller{
 		$user=$this->session->userdata('username');
 //		echo $user;
 		if($user=='')redirect('login');
-					
+		if($user=='administrator')return;
 		$totalSale= 0;
 			$costSale=0;
 			$fixCost=0;
@@ -46,10 +46,12 @@ class Calculation extends CI_Controller{
 		$_REQUEST['ConversionRate']=0;
 		$_REQUEST['jobName']="";
 		$_REQUEST['timePeriod']=0;
-		$data['cancelButton']=false;
-		if($user=='adminUser')
-			$data['cancelButton']=true;
-$data['expenseUrl']="expense/calcExpense";
+		
+		$data['viewOnly']=false;
+		if($user=='administrator')
+			$data['viewOnly']=false;
+		$data['expenseUrl']="expense/calcExpense";
+		$data['cancelUrl'] = "breakeven";
 						
 			
 		$_REQUEST['urlValue']="calculation/formSubmit";
@@ -63,8 +65,10 @@ $data['expenseUrl']="expense/calcExpense";
 		
 		$this->load->library('session');
 		$user=$this->session->userdata('username');
+		$loggedIn=$this->session->userdata('logged_in');
+		$companyName=$this->session->userdata('companyName');
 //		echo $user;
-		if($user!='adminUser')redirect('login/logout');
+		if($loggedIn!=TRUE)redirect('login/logout');
 		$this->load->helper('form');
 		$this->load->helper('html');
 		$this->load->model('calculation_model');
@@ -76,7 +80,8 @@ $data['expenseUrl']="expense/calcExpense";
 		
 		if((int)$id > 0){
 						
-			$query = $this->calculation_model->get($id);
+			$query = $this->calculation_model->get($id,$companyName,$user);
+			if(count($query)==0)return;
 			if($query['be_seq']=='')
 			{				
 				$_REQUEST['errorMessage']="Invalid Record";
@@ -98,7 +103,7 @@ $data['expenseUrl']="expense/calcExpense";
 			$data['fixCost']=$fixCost;
 			$data['avarageSale']=$avarageSale;
 			$data['converisonRate']=$converisonRate;
-			$data['cancelButton']=true;
+			$data['viewOnly']=true;
 			$data['jobName']=$jobName;//   add  alpesh
 			$_REQUEST['FixedCost']=$fixCost;
 			$_REQUEST['breakeven']="10";
@@ -118,6 +123,7 @@ $data['expenseUrl']="expense/calcExpense";
 
 		$_REQUEST['urlValue']="../../calculation/formSubmit";
 		$data['expenseUrl']="expense/calcExpense";
+		$data['cancelUrl'] = "../../breakeven";
 		
 		$this->load->view('CalculationForm',$data);
 		
@@ -139,9 +145,9 @@ $data['expenseUrl']="expense/calcExpense";
 		
 //		$_REQUEST['requestFrom']='fromForm';
 		$data="";
-		$data['cancelButton']=false;
-		if($user=='adminUser')
-			$data['cancelButton']=true;
+		$data['viewOnly']=false;
+		if($user=='administrator')
+			$data['viewOnly']=true;
 		$data['logoutUrl']='../login/logout';
 		$data['companyName']=$this->session->userdata('companyName');			
 		
@@ -149,6 +155,7 @@ $data['expenseUrl']="expense/calcExpense";
 		$_REQUEST['urlValue']=base_url()."index.php/calculation/formSubmit";
 		$_REQUEST['logoutUrl']=base_url()."index.php/login/logout";
 		$data['expenseUrl']="../expense/calcExpense";
+		$data['cancelUrl'] = "../breakeven";
 		
 		$this->load->view('CalculationForm',$data);
 	}
