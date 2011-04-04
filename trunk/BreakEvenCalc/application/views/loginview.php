@@ -6,6 +6,8 @@
 <head>
 <link rel="stylesheet" href='<?php echo base_url(); ?>css/webcalc.css'
 	type="text/css" media="screen, projection" />
+	<LINK REL="SHORTCUT ICON"
+       HREF="<?php echo base_url(); ?>images/favicon.ico">
 <title>Web Break Even Calc</title>
 </head>
 <body>
