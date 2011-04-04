@@ -10,7 +10,7 @@ class calculation_model extends CI_Model{
 		
 		$this->load->database();
 
-		if($user=='adminUser'){
+		if($user=='administrator'){
 			$query = $this->db->get_where('break_even_data',array('be_seq'=>$id));			
 		}
 		else{
