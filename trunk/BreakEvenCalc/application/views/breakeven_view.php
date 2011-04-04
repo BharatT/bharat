@@ -4,7 +4,8 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href='<?php echo base_url(); ?>css/webcalc.css'
 	type="text/css" media="screen, projection" />
-	
+	<LINK REL="SHORTCUT ICON"
+       HREF="<?php echo base_url(); ?>images/favicon.ico">	
 <title>Break Even List</title>
 </head>
 <body><form action="" method="post">
