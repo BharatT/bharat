@@ -832,7 +832,7 @@ function isNumeric(){
 					<tr>
 						<td><span style="font-size: 13px">FIXED COST(TIME PERIOD) </span></td>
 						<td><input id="tpFixedCost" name="tpFixedCost" type="text" readonly="readonly"
-							value="<?php echo $tpFixedcost; ?>" maxlength="10" tabindex="6" /></td>
+							value="<?php echo $tpFixedcost; ?>" style="background-color: #ebf3fd" maxlength="10" tabindex="6" /></td>
 						<td><input id="tpFixedcostQuerterly" name="tpFixedcostQuerterly"
 							type="text" value="<?php echo $tpFixedcostQuerterly; ?>"
 							readonly="readonly" style="background-color: #ebf3fd"

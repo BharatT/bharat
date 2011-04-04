@@ -31,7 +31,16 @@ if(($this->session->userdata('username')==''))redirect('login');
 		$data['results'] = $this->breakeven_model->get_books($config['per_page'],$this->uri->segment(3));}
 	else 
 	{
-		$data['addURL']="calculation";
+		if($this->uri->segment(3)=='')
+		{
+			$data['addURL']="calculation";
+		}
+		else 
+		{
+			$data['addURL']="../../calculation";			
+		}
+		
+		
 		$companyId=$this->session->userdata('companyName');
 		$data['results'] = $this->breakeven_model->get_filter_breakeven($companyId,$config['per_page'],$this->uri->segment(3));
 	}
@@ -57,11 +66,11 @@ else
 			//				echo $row['be_seq'];
 			//$row['be_seq']=redirect('welcome/test');
 			$this->table->add_row(anchor('calculation/input/'.$row['be_seq'],$row['be_seq'], 'Link ' .$row['be_seq']), $row['be_total_sale'], $row['be_cost_sale'], $row['be_fix_cost'],
-			$row['be_avg_sale'],$row['be_conv_rate'],date('d-m-Y', strtotime($row['be_date'])),$row['be_create_by'],$row['be_time_period']); //Add each result row into table, 
+			$row['be_avg_sale'],$row['be_conv_rate'],date('d-m-Y', strtotime($row['be_date'])),$row['be_create_by'],$row['be_time_period'],$row['be_company']); //Add each result row into table, 
 					
 		}
 
-		$this->table->set_heading('RecordID',	'Total Sale',	'Cost of Sale',	'Fix Cost',	'Average Sale',	'Conversion Rate',	'Date',	'Create By','Time Period');
+		$this->table->set_heading('RecordID',	'Total Sale',	'Cost of Sale',	'Fix Cost',	'Average Sale',	'Conversion Rate',	'Date',	'Create By','Time Period','Company');
 		//	$this->table->set_heading('ID', 'Title', 'Author', 'Description');
 
 		//To remove existing data

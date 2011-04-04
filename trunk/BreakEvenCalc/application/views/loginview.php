@@ -54,15 +54,15 @@ Break Even Cal
 <tbody>
 <tr>
 <td>Login ID: </td>
-<td><input id="_id0:ID" type="text" name="myusername" maxlength="10" /></td>
+<td><input id="_id0:ID" type="text" name="myusername" maxlength="20" /></td>
 </tr>
 <tr>
 <td> Password: </td>
-<td><input id="_id0:Password" type="password" name="mypassword" value="" maxlength="10" /></td>
+<td><input id="_id0:Password" type="password" name="mypassword" value="" maxlength="20" /></td>
 </tr>
 <tr>
 <td> Company Name: </td>
-<td><input id="_id0:Company" type="text" name="mycompany" maxlength="10" /></td>
+<td><input id="_id0:Company" type="text" name="mycompany" maxlength="20" /></td>
 </tr>
 <tr>
 <td><div></div></td>
