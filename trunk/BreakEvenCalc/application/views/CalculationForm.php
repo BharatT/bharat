@@ -160,10 +160,10 @@ function isNumeric(){
 	
 	$grossIncome =grossIncomeC($totalSale, $costofSale);
 	$grossMargin = grossMarginD($grossIncome, $totalSale);
-	$fixedcostQuerterly = round(fixedcostQuarterlyE($fixedCost));
-	$fixedcostMonthly = round(fixedcostMonthlyE($fixedCost));
-	$fixedcostWeekly =round(fixedcostWeeklyE($fixedCost));
-	$fixedcostDaily = round(fixedcostDailyE($fixedcostWeekly));
+	$fixedcostQuerterly = round(fixedcostQuarterlyETime($fixedCost,$timePeriod));
+	$fixedcostMonthly = round(fixedcostMonthlyETime($fixedCost,$timePeriod));
+	$fixedcostWeekly =round(fixedcostWeeklyETime($fixedCost,$timePeriod));
+	$fixedcostDaily = round(fixedcostDailyETime($fixedcostWeekly,$timePeriod));
 	$grossmarginYearly =round(grossmarginYearlyE($grossMargin));
 	$grossmarginQuerterly =round( grossmarginQuarterlyE($grossMargin),2);
 	$grossmarginMonthly = round(grossmarginMonthlyE($grossMargin),2);
@@ -243,6 +243,48 @@ function isNumeric(){
 
 	}
 
+	
+	//---------------------fixed cost
+	function  fixedcostQuarterlyETime($fixedCostValue,$timePeriod)
+	{
+		if($timePeriod=='' || $timePeriod<=0)
+			$timePeriod=1;	
+		$fixedcostQ=($fixedCostValue/$timePeriod)*3;
+
+		return $fixedcostQ;
+
+	}
+	function  fixedcostMonthlyETime($fixedCostValue,$timePeriod)
+	{
+		if($timePeriod=='' || $timePeriod<=0)
+			$timePeriod=12;		
+			echo $fixedCostValue/$timePeriod;	
+		$fixedcostM=($fixedCostValue/$timePeriod);
+		return $fixedcostM;
+
+	}
+	function  fixedcostWeeklyETime($fixedCostValue,$timePeriod)
+	{
+		if($timePeriod=='' || $timePeriod<=0)
+			$timePeriod=12;	
+		
+		$fixedcostW=($fixedCostValue/$timePeriod)/4.333;
+		return $fixedcostW;
+
+	}
+	function fixedcostDailyETime($fixedcostValue,$timePeriod)
+	{
+		if($timePeriod=='' || $timePeriod<=0)
+		$timePeriod=1;	
+		$fixedcostD=$fixedcostValue/5;
+		return $fixedcostD;
+
+	}
+	
+	
+	
+	
+	
 	//gross margin
 	function  grossmarginYearlyE($grossmargin)
 	{
@@ -805,7 +847,7 @@ function isNumeric(){
 				<tbody>
 					<tr>
 						<td></td>
-						<td><span style="font-size: 12px">YEARLY</span></td>
+						<td><span style="font-size: 12px">YEARLY/PERIOD</span></td>
 						<td><span style="font-size: 12px">QUARTERLY</span></td>
 						<td><span style="font-size: 12px">MONTHLY</span></td>
 						<td><span style="font-size: 12px">WEEKLY</span></td>
@@ -831,6 +873,14 @@ function isNumeric(){
 							style="background-color: #ebf3fd" disabled="disabled" /></td>
 					</tr>
 
+					<tr>
+						<td></td>
+						<td><span style="font-size: 12px">YEARLY</span></td>
+						<td><span style="font-size: 12px">QUARTERLY</span></td>
+						<td><span style="font-size: 12px">MONTHLY</span></td>
+						<td><span style="font-size: 12px">WEEKLY</span></td>
+						<td><span style="font-size: 12px">DAILY</span></td>
+					</tr>
 					<tr>
 						<td><span style="font-size: 13px">FIXED COST(TIME PERIOD) </span></td>
 						<td><input id="tpFixedCost" name="tpFixedCost" type="text" readonly="readonly"
