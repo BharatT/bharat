@@ -258,7 +258,6 @@ function isNumeric(){
 	{
 		if($timePeriod=='' || $timePeriod<=0)
 			$timePeriod=12;		
-			echo $fixedCostValue/$timePeriod;	
 		$fixedcostM=($fixedCostValue/$timePeriod);
 		return $fixedcostM;
 
